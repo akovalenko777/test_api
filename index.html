@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div, span {
+      border: 2px solid #f00;
+    }
+    * {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.label {
+  border: 2px solid black;
+  width: 270px;
+  margin: 20px auto;
+  padding: 0 7px;
+}
+
+header h1 {
+  text-align: center;
+  margin: -4px 0;
+  letter-spacing: 0.15px
+}
+
+p {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divider {
+  border-bottom: 1px solid #888989;
+  margin: 2px 0;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.large {
+  height: 10px;
+}
+
+.large, .medium {
+  background-color: black;
+  border: 0;
+}
+
+.medium {
+  height: 5px;
+}
+
+.small-text {
+  font-size: 0.85rem;
+}
+
+
+.calories-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.calories-info h2 {
+  margin: 0;
+}
+
+.left-container p {
+  margin: -5px -2px;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.calories-info span {
+  margin: -7px -2px;
+  font-size: 2.4em;
+  font-weight: 700;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.indent {
+  margin-left: 1em;
+}
+
+.daily-value p:not(.no-divider) {
+  border-bottom: 1px solid #888989;
+}
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- <div class="label">
+    <header>
+      <h1 class="bold">Nutrition Facts</h1>
+      <div class="divider"></div>
+      <p>8 servings per container</p>
+      <p class="bold">Serving size <span>2/3 cup (55g)</span></p>
+    </header>
+    <div class="divider large"></div>
+    <div class="calories-info">
+      <div class="left-container">
+        <h2 class="bold small-text">Amount per serving</h2>
+        <p>Calories</p>
+      </div>
+      <span>230</span>
+    </div>
+    <div class="divider medium"></div>
+    <div class="daily-value small-text">
+      <p class="bold right no-divider">% Daily Value *</p>
+      <div class="divider"></div>
+      <p><span><span class="bold">Total Fat</span> 8g</span> <span class="bold">10%</span></p>
+      <p class="indent no-divider">Saturated Fat 1g <span class="bold">5%</span></p>
+    </div>    
+  </div> -->
+
+<!-- <div class="flex">
+  <div class="card">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas officiis eum quam numquam impedit! Delectus unde quisquam quae quam facere nam mollitia consequatur sunt libero. Eaque tenetur minus temporibus amet!
+  </div>
+  <div class="card">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas officiis eum quam numquam impedit! Delectus unde quisquam quae quam facere nam mollitia consequatur sunt libero. Eaque tenetur minus temporibus amet!
+  </div>
+</div> -->
+
+
+  <div class="box"></div>
+
+  <script>
+  async function getTokenSpotify(){
+    const resp = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `grant_type=client_credentials&client_id=4e589db01a664f1aa53eaac2f9151b4d&client_secret=52a232b3016b4a58aad4b9737e04eb31`
+    })
+    const json = await resp.json()
+    console.log(json);
+    localStorage.setItem('token', json.access_token)
+  }
+
+  async function getToken(){
+    const resp = await fetch('https://webdocs.site/api_test/', {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `client_id=4e589db01a664f1aa53eaac2f9151b4d&client_secret=52a232b3016b4a58aad4b9737e04eb31`
+    })
+    const json = await resp.json()
+    console.log(json);
+    localStorage.setItem('token', json.access_token)
+  }
+
+  
+
+  // async function fetchData(req){
+  //   const token = localStorage.getItem('token')
+  //   const resp = await fetch(`https://api.spotify.com/v1${req}`, {
+  //     headers: {
+  //       Authorization: 'Bearer '+token
+  //     }
+  //   })
+  //   const json = await resp.json()
+  //   console.log(json);
+  // }
+  async function fetchData(req){
+    const token = localStorage.getItem('token')
+    const resp = await fetch(`https://webdocs.site/api_test/`, {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: 'Bearer '+token
+      },
+      body: `path=${req}`
+    })
+    const json = await resp.json()
+    console.log(json);
+  }
+
+  // getTokenSpotify();
+  // fetchData('/tracks/11dFghVXANMlKmJXsNCbNl');
+
+  async function testFetch(){
+    const resp = await fetch('https://www.amiiboapi.com/api/amiibo/?character=zelda&showusage')
+    const json = await resp.json()
+    console.log(json);
+  }
+
+  testFetch();
+
+  </script>
+
+</body>
+</html>

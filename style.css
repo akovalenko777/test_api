@@ -1,0 +1,22 @@
+.card {
+  width: 400px;
+  background-color: lightblue;
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 40px;
+  /* margin-top: 60px; */
+}
+
+.flex {
+  /* display: flex; */
+  flex-direction: column;
+  padding-top: 60px;
+}
+
+.box {
+  border: 2px solid red;
+  width: 25%;
+  /* height: 300px; */
+  aspect-ratio: 12/52;
+}
+
